@@ -5,21 +5,6 @@ import glslify from 'glslify';
 import frag from './frag.glsl';
 
 const fragmentShader = frag;
-// const fragmentShader = glslify`
-// varying vec2 vUv;
-
-// vec3 colorA = vec3(0.912,0.191,0.652);
-// vec3 colorB = vec3(1.000,0.777,0.152);
-
-// void main() {
-//   // "Normalizing" with an arbitrary value
-//   // We'll see a cleaner technique later :)
-//   vec2 normalizedPixel = gl_FragCoord.xy/600.0;
-//   vec3 color = mix(colorA, colorB, normalizedPixel.x);
-
-//   gl_FragColor = vec4(color,1.0);
-// }
-// `;
 
 const vertexShader = glslify`
 varying vec2 vUv;
@@ -34,6 +19,11 @@ void main() {
 }
 `;
 
+const CustomShader = {
+  vertexShader,
+  fragmentShader,
+};
+
 const Fragment = () => {
   // This reference will give us direct access to the mesh
   const mesh = useRef();
@@ -41,10 +31,7 @@ const Fragment = () => {
   return (
     <mesh ref={mesh} position={[0, 0, 0]} scale={1.0}>
       <planeGeometry args={[1, 1, 32, 32]} />
-      <shaderMaterial
-        fragmentShader={fragmentShader}
-        vertexShader={vertexShader}
-      />
+      <shaderMaterial args={[CustomShader]} />
     </mesh>
   );
 };
