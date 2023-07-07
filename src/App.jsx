@@ -19,6 +19,8 @@ void main() {
 }
 `;
 
+// For Reference
+// https://github.com/UstymUkhman/vite-plugin-glsl/issues/41#issuecomment-1625578692
 const CustomShader = {
   vertexShader,
   fragmentShader,
